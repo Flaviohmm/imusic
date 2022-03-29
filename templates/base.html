@@ -17,7 +17,7 @@
 
     {% if user.is_authenticated %}
         <nav class="navbar navbar-expand-lg navbar-dark bg_navbar py-3">
-            <a href="{% url 'home' %}" class="navbar-brand">
+            <a href="{% url 'plataforma:home' %}" class="navbar-brand">
                 <img src="{% static 'plataforma/img/logo.png' %}" width="80">&nbsp
                 <h3 class="font_logo">Imusic</h3>
             </a>
@@ -30,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a href="#" class="nav-link lead mr-2 font-weight-bold">Adicionar Álbum</a>
+                            <a href="{% url 'plataforma:adicionar_album' user %}" class="nav-link lead mr-2 font-weight-bold">Adicionar Álbum</a>
                         </li>
                         <li class="nav-item active">
                             <a href="{% url 'sair' %}" class="nav-link lead font-weight-bold">Sair</a>
