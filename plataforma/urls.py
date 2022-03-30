@@ -14,4 +14,7 @@ urlpatterns = [
 
     # página de detalhes do álbum /@username/album/nome_do_album
     path('@<str:username>/album/<str:album>/', views.detalhe_album, name="detalhe_album"),
+
+    # deletar álbum /@username/album/nome_do_album/deletar
+    path('@<str:username>/album/<str:album>/deletar/', views.deletar_album, name="deletar_album"),
 ]

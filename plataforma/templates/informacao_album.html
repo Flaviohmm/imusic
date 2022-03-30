@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'plataforma/css/home.css' %}">
+{% endblock 'head' %}
+
+{% block 'titulo' %}Informação do Álbum{% endblock 'titulo' %}
+
+{% block 'body' %}
+    <br>
+    <ul class="album-list">
+        <h2>{{album.nome_do_album}}</h2>
+        <br>
+        {% if album.artista_do_album == user %}
+            <a href="{% url 'plataforma:deletar_album' username album %}" class="btn btn-danger">Deletar</a>
+        {% endif %}
+    </ul>
+{% endblock 'body' %}

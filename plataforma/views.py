@@ -63,3 +63,19 @@ def detalhe_album(request, username, album):
     musicas = musicas.albuns.get(nome_do_album=str(album))
     musicas = musicas.musicas.all()
     return render(request, 'informacao_album.html', {'musicas': musicas, 'album': album, 'username': username})
+
+
+@login_required(login_url='/auth/login')
+def deletar_album(request, username, album):
+    user = get_object_or_404(User, username=username)
+    if request.user == user:
+        album_para_deletar = get_object_or_404(User, username=username)
+        album_para_deletar = album_para_deletar.albuns.get(nome_do_album=album)
+        musica_para_deletar = album_para_deletar.musicas.all()
+        for musica in musica_para_deletar:
+            musica.delete_media()           # Exclui o arquivo de música
+        album_para_deletar.delete_media()   # Exclui a logo do álbum
+        album_para_deletar.delete()         # Exclui o álbum do banco de dados
+        return redirect('plataforma:detalhe_perfil', username=username)
+    else:
+        return redirect('plataforma:detalhe_perfil', username=username)
