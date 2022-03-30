@@ -10,11 +10,25 @@
 
 {% block 'body' %}
     <br>
-    <ul class="album-list">
-        <h2>{{album.nome_do_album}}</h2>
-        <br>
-        {% if album.artista_do_album == user %}
-            <a href="{% url 'plataforma:deletar_album' username album %}" class="btn btn-danger">Deletar</a>
-        {% endif %}
-    </ul>
+    <div class="container">
+        <ul class="album-list">
+            <h2>{{album.nome_do_album}}</h2>
+            <br>
+            {% if album.artista_do_album == user %}
+                <a href="{% url 'plataforma:deletar_album' username album %}" class="btn btn-danger">Deletar</a>
+                <a href="{% url 'plataforma:adicionar_musica' username album %}" class="btn btn-primary">
+                    Adicionar nova música
+                </a>
+            {% endif %}
+            {% for musica in musicas %}
+                <li class="margin_top">
+                    {{musica.nome_da_musica}}
+                    <br>
+                    <audio controls>
+                        <source src="{{musica.arquivo_de_musica.url}}" type="audio/mp3">
+                    </audio>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock 'body' %}

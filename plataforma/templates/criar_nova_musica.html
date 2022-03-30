@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'plataforma/css/home.css' %}">
+{% endblock 'head' %}
+
+{% block 'titulo' %}Adicionar nova música{% endblock 'titulo' %}
+
+{% block 'body' %}
+    <br>
+    <div class="container">
+        <h2>Adicionar nova música aqui.</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <button class="save btn btn-success" type="submit">Salvar</button>
+        </form>
+    </div>
+{% endblock 'body' %}

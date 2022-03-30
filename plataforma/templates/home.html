@@ -9,8 +9,8 @@
 {% block 'titulo' %}Home{% endblock 'titulo' %}
 
 {% block 'body' %}
-    <hr>
-    <div>
+
+    <div class="container margin_top">
         <ul class="home-list">
             {% for album in albuns %}
                 <li>
@@ -20,11 +20,10 @@
                         </a>
                     </span>
                     <span style="color: #007bff">{{album.nome_do_album}}</span> by
-                    <a href="{% url 'plataforma:detalhe_perfil' username=album.nome_do_album %}" class="home-a">
+                    <a href="{% url 'plataforma:detalhe_perfil' username=album.artista_do_album %}" class="home-a">
                         {{album.artista_do_album}}
                     </a>
                 </li>
-                <hr>
             {% endfor %}
         </ul>
     </div>

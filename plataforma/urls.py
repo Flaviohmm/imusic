@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
 
+
 app_name = 'plataforma'
+
 urlpatterns = [
     # home /
     path('', views.home, name="home"),
@@ -17,4 +19,7 @@ urlpatterns = [
 
     # deletar álbum /@username/album/nome_do_album/deletar
     path('@<str:username>/album/<str:album>/deletar/', views.deletar_album, name="deletar_album"),
+
+    # adicionar músicas para os álbuns
+    path('@<str:username>/album/<str:album>/adicionar/', views.adicionar_musica, name="adicionar_musica"),
 ]

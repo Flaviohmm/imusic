@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'plataforma/css/home.css' %}">
+{% endblock 'head' %}
+
+{% block 'titulo' %}Informação do Artista{% endblock 'titulo' %}
+
+{% block 'body' %}
+    <br>
+    <div class="container">
+        {% for album in albuns %}
+            <h2>
+                <a href="{% url 'plataforma:detalhe_album' username album %}">{{album.nome_do_album}}</a>
+            </h2>
+            {% if album.artista_do_album == user %}
+                <a href="{% url 'plataforma:deletar_album' username album %}">Deletar</a>
+            {% endif %}
+            {% for musica in album.musicas.all %}
+                <li class="margin_top">
+                    {{musica.nome_da_musica}}
+                    <br>
+                    <audio controls>
+                        <source src="musica.arquivo_de_musica.url" type="audio/mp3">
+                    </audio>
+                </li>
+            {% endfor %}
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock 'body' %}

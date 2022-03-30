@@ -79,3 +79,29 @@ def deletar_album(request, username, album):
         return redirect('plataforma:detalhe_perfil', username=username)
     else:
         return redirect('plataforma:detalhe_perfil', username=username)
+
+
+@login_required(login_url='/auth/login')
+def adicionar_musica(request, username, album):
+    
+    user = get_object_or_404(User, username=username)
+
+    if request.user == user:
+
+        album_get = Album.objects.get(nome_do_album=album)
+
+        if request.method == 'POST':
+            form = NovaMusicaForm(request.POST, request.FILES)
+            if form.is_valid():
+                song = Musica.objects.create(
+                    nome_da_musica = form.cleaned_data.get('nome_da_musica'),
+                    arquivo_de_musica = form.cleaned_data.get('arquivo_de_musica'),
+                    album_da_musica = album_get
+                )
+                return redirect('plataforma:detalhe_album', username=username, album=album)
+            
+        else:
+            form = NovaMusicaForm()
+            return render(request, 'criar_nova_musica.html', {'form': form})
+    else:
+        return redirect('plataforma:detalhe_album', username=username, album=album)
